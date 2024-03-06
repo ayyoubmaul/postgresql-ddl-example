@@ -1,5 +1,5 @@
 -- Create a schema for the data warehouse
-CREATE SCHEMA data_warehouse;
+CREATE schema if not EXISTS data_warehouse;
 
 -- Create a dimension table for customers
 CREATE TABLE data_warehouse.customer_dimension (
@@ -78,3 +78,20 @@ SELECT
     (random() * 10 + 1)::int,
     (random() * 1000)::numeric(12, 2)
 FROM generate_series(1, 100);
+
+
+-- CHECK TABLES 
+select * from data_warehouse.customer_dimension;
+
+select * from data_warehouse.product_dimension;
+
+select * from data_warehouse.time_dimension;
+
+select * from data_warehouse.sales_fact order by date_id asc;
+
+-- BUSINESS QUESTION
+select 
+	SUM(quantity * revenue) as total_revenue
+from data_warehouse.sales_fact as sf
+left join data_warehouse.time_dimension as td on sf.date_id = td.date_id 
+where td.month = 'Jan' and td.year = 2024;
