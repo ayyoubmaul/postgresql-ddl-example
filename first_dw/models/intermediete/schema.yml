@@ -1,0 +1,59 @@
+
+version: 2
+
+models:
+  - name: dim_customer
+    description: "This model contains information about customers"
+    columns:
+      - name: customer_id
+        description: "The primary key for this table this column should be unique"
+        tests:
+          - unique
+          - not_null
+      - name: customer_name
+        description: "The name of the customer"
+      - name: email
+        description: "The email address of the customer"
+      - name: phone_number
+        description: "The phone number of the customer"
+
+  - name: dim_prodict
+    description: "This model contains information about products"
+    columns:
+      - name: product_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: product_name
+        description: "The name of the product"
+      - name: category
+        description: "The category of the product"
+      - name: price
+        description: "The price of the product"
+
+  - name: fact_sales
+    description: "This model contains information about sales"
+    columns:
+      - name: sale_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+      - name: customer_id
+        description: "The customer who made the sale"
+        tests:
+          - not_null
+      - name: product_id
+        description: "The product that was sold"
+        tests:
+          - not_null
+      - name: date_id
+        description: "The date of the sale"
+        tests:
+          - not_null
+      - name: quantity
+        description: "The quantity of the product that was sold"
+        tests:
+          - not_null
+      - name: revenue
+        description: "The revenue of the sale"
