@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: data_warehouse
+    database: postgres
+    schema: data_warehouse
+    tables:
+      - name: customer_dimension
+      - name: product_dimension
+      - name: time_dimension
+      - name: sales_fact
